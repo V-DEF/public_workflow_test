@@ -1,0 +1,32 @@
+name: Add Member to Team
+on:
+  workflow_dispatch:
+    inputs:
+      username:
+        description: 'GitHub username of the new member'
+        required: true
+        type: string
+jobs:
+  add_member:
+    runs-on: ubuntu-24.04
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    - name: Add member to team
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        ORG_NAME: V-DEF
+        TEAM_SLUG: user
+        USERNAME: ${{ github.event.inputs.username }}
+      run: |
+        echo "Adding user $USERNAME to team $TEAM_SLUG in organization $ORG_NAME"
+        response=$(curl -s -X PUT -H "Authorization: token $GH_TOKEN" \
+                          -H "Accept: application/vnd.github.v3+json" \
+                          https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_SLUG/memberships/$USERNAME)
+        echo "API Response: $response"
+        if echo "$response" | jq -e '.state == "active"' > /dev/null; then
+          echo "User $USERNAME added to team $TEAM_SLUG successfully."
+        else
+          echo "Failed to add user $USERNAME to team $TEAM_SLUG."
+          exit 1
+        fi
