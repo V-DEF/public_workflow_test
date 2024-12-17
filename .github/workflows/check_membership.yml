@@ -1,33 +1,36 @@
-name: Add member to team version 1
+name: Check Team Membership
+
 on:
   workflow_dispatch:
     inputs:
       username:
-        description: 'GitHub username of the new member'
+        description: 'GitHub username to check'
         required: true
         type: string
+
 jobs:
-  add_member:
+  check_membership:
     runs-on: ubuntu-24.04
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-    
-    - name: Add member to team
+
+    - name: Check team membership
       env:
         GH_TOKEN: ${{ secrets.READ_WRITE }}
-        ORG_NAME: V-DEF
-        TEAM_SLUG: user
+        ORG_NAME: your-org-name
+        TEAM_SLUG: fred
         USERNAME: ${{ github.event.inputs.username }}
       run: |
-        echo "Adding user $USERNAME to team $TEAM_SLUG in organization $ORG_NAME"
-        response=$(curl -s -X GET -H "Authorization: token $GH_TOKEN" \
+        echo "Checking if user $USERNAME is a member of team $TEAM_SLUG in organization $ORG_NAME"
+        response=$(curl -s -H "Authorization: token $GH_TOKEN" \
                           -H "Accept: application/vnd.github.v3+json" \
                           https://api.github.com/orgs/$ORG_NAME/teams/$TEAM_SLUG/memberships/$USERNAME)
         echo "API Response: $response"
         if echo "$response" | jq -e '.state == "active"' > /dev/null; then
-          echo "User $USERNAME added to team $TEAM_SLUG successfully."
+          echo "User $USERNAME is a member of team $TEAM_SLUG."
         else
-          echo "Failed to add user $USERNAME to team $TEAM_SLUG."
+          echo "User $USERNAME is NOT a member of team $TEAM_SLUG."
           exit 1
         fi
