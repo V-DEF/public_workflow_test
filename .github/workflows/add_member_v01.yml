@@ -17,7 +17,7 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.READ_WRITE }}
         ORG_NAME: V-DEF
-        TEAM_SLUG: user
+        TEAM_SLUG: reader
         USERNAME: ${{ github.event.inputs.username }}
       run: |
         echo "Adding user $USERNAME to team $TEAM_SLUG in organization $ORG_NAME"

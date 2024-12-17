@@ -19,8 +19,8 @@ jobs:
     - name: Check team membership
       env:
         GH_TOKEN: ${{ secrets.READ_WRITE }}
-        ORG_NAME: your-org-name
-        TEAM_SLUG: fred
+        ORG_NAME: V-DEF
+        TEAM_SLUG: reader
         USERNAME: ${{ github.event.inputs.username }}
       run: |
         echo "Checking if user $USERNAME is a member of team $TEAM_SLUG in organization $ORG_NAME"

@@ -22,4 +22,4 @@ jobs:
         run: |
           echo ${{ secrets.READ_WRITE }} | gh auth login --hostname github.com --with-token
           gh auth status
-          gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/V-DEF/teams/user/memberships/Normtronic -f role='maintainer' 
+          gh api --method PUT -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /orgs/V-DEF/teams/reader/memberships/Normtronic -f role='maintainer' 
