@@ -1,0 +1,29 @@
+name: Check Organization Access
+
+on:
+  workflow_dispatch:
+
+jobs:
+  check_access:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Check organization access
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        ORG_NAME: V-DEF
+      run: |
+        echo "Checking access to organization: $ORG_NAME"
+        response=$(curl -s -H "Authorization: token $GH_TOKEN" \
+                          -H "Accept: application/vnd.github.v3+json" \
+                          https://api.github.com/user/memberships/orgs/$ORG_NAME)
+        echo "API Response: $response"
+        if echo "$response" | jq -e '.state == "active"' > /dev/null; then
+          echo "You have access to the organization $ORG_NAME."
+        else
+          echo "You do NOT have access to the organization $ORG_NAME."
+          exit 1
+        fi
