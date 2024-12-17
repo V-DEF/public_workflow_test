@@ -1,5 +1,4 @@
-name: Add user to team
-
+name: Add member to team version 2
 on: 
   workflow_dispatch:
     inputs:
@@ -7,13 +6,12 @@ on:
         description: 'GitHub username of the new member'
         required: true
         type: string
-
 jobs:
-  validate-issue:
+  add_member:
     runs-on: ubuntu-24.04
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: write username
         run: |

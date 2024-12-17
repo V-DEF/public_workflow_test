@@ -1,4 +1,4 @@
-name: Add Member to Team
+name: Add member to team version 1
 on:
   workflow_dispatch:
     inputs:
@@ -12,6 +12,7 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+    
     - name: Add member to team
       env:
         GH_TOKEN: ${{ secrets.READ_WRITE }}
