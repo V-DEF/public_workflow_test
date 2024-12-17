@@ -22,7 +22,7 @@ jobs:
 
     - name: Create GitHub Issue
       env:
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GH_TOKEN: ${{ secrets.READ_WRITE }}
         ORG_NAME: V-DEF
         REPO_NAME: public_workflow_test
         ISSUE_TITLE: ${{ github.event.inputs.title }}
