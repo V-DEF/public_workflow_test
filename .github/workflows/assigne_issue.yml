@@ -18,7 +18,7 @@ jobs:
       with:
         github-token: ${{ secrets.READ_WRITE }}
         script: |
-          const issueNumber = context.issue.number;
+          const issueNumber = '10';
           const teamSlug = 'v-admins';
           const org = 'V-DEF';
 
