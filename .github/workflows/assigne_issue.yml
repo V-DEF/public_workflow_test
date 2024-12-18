@@ -25,7 +25,7 @@ jobs:
         script: |
           const issueNumber = ${{ inputs.issuenumber }};
           const teamSlug = 'v-admins';
-          const org = 'V-DEF';
+          const org = context.repo.repo;
 
           // Log issueNumber
           console.log('issueNumber:', issueNumber);
@@ -64,12 +64,12 @@ jobs:
           console.log('OWNER:', context.repo.owner);
 
           // Log repo
-          console.log('REPO:', context.repo.repo);
+          console.log('REPO:', org);
 
           // Assign all team members to the issue
           await github.rest.issues.addAssignees({
             owner: context.repo.owner,
-            repo: context.repo.repo,
+            repo: org,
             issue_number: issueNumber,
             assignees: assignees,
           });
