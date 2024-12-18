@@ -6,34 +6,14 @@ on:
 
 jobs:
   assign-issue:
-    if: github.event.issue.title == 'request'
+    if: github.event.issue.title == 'Request access'
     runs-on: ubuntu-24.04
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Check issue title
-      uses: actions/github-script@v6
-      id: check_title
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          if (context.payload.issue.title !== 'Request access') {
-            core.setOutput('continue', 'false');
-            console.log(`Issue title is NOT valid, skipping "Assign issue".`);
-          } else {
-            core.setOutput('continue', 'true');
-            console.log(`Issue title is valid, continuing "Assign issue".`);
-          }
-
-    - name: Skip job if issue title is not valid
-      if: steps.check_title.outputs.continue == 'false'
-      run: echo "Skipping job because issue title is NOT valid."
-      continue-on-error: true
-
     - name: Assign issue to v-admin team member
-      if: steps.check_title.outputs.continue == 'true'
       uses: actions/github-script@v6
       with:
         github-token: ${{ secrets.READ_WRITE }}
