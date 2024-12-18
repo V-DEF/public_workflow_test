@@ -3,6 +3,7 @@ name: Assign Issue to Team Member
 on:
   issues:
     types: [opened]
+  workflow_dispatch:
 
 jobs:
   assign-issue:
