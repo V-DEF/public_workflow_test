@@ -6,7 +6,6 @@ on:
 
 jobs:
   assign-issue:
-    if: github.event.issue.title == 'request'
     runs-on: ubuntu-24.04
 
     steps:
