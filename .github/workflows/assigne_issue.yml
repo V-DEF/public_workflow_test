@@ -25,7 +25,7 @@ jobs:
         script: |
           const issueNumber = ${{ inputs.issuenumber }};
           const teamSlug = 'v-admins';
-          const org = context.repo.repo;
+          const org = context.repo.owner;
 
           // Log issueNumber
           console.log('issueNumber:', issueNumber);
@@ -37,7 +37,7 @@ jobs:
           });
 
           // Log List of team members
-          console.log('team infos:', team);
+          // console.log('team infos:', team);
 
           const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
             org,
@@ -45,7 +45,7 @@ jobs:
           });
 
           // Log the team members
-          console.log('Team Members:', teamMembers);
+          // console.log('Team Members:', teamMembers);
 
           if (teamMembers.length === 0) {
             throw new Error(`No members found in the team ${teamSlug }`);
@@ -58,18 +58,18 @@ jobs:
           console.log('assignees:', assignees);
 
           // Log context
-          console.log('context:', context);
+          // console.log('context:', context);
 
           // Log owner
-          console.log('OWNER:', context.repo.owner);
+          console.log('OWNER:', org);
 
           // Log repo
-          console.log('REPO:', org);
+          console.log('REPO:', context.repo.repo);
 
           // Assign all team members to the issue
           await github.rest.issues.addAssignees({
-            owner: context.repo.owner,
-            repo: org,
+            owner: org,
+            repo: context.repo.repo,
             issue_number: issueNumber,
             assignees: assignees,
           });
