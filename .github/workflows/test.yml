@@ -5,11 +5,6 @@ on:
     branches:
       - dev
   workflow_dispatch:
-    inputs:
-      username:
-        description: 'GitHub'
-        required: true
-        type: string
 
 jobs:
   test:
