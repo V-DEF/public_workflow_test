@@ -58,7 +58,13 @@ jobs:
           console.log('assignees:', assignees);
 
           // Log context
-          console.log('context:', context);
+          console.log('context:', "PFERS");
+
+          // Log owner
+          console.log('owner:', context.repo.owner);
+
+          // Log owner
+          console.log('repo:', context.repo.repo);
 
           // Assign all team members to the issue
           await github.rest.issues.addAssignees({
