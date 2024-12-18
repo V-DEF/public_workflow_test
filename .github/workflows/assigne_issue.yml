@@ -19,7 +19,7 @@ jobs:
         script: |
           const issueNumber = context.issue.number;
           const teamSlug = 'v-admins';
-          const org = V-DEF;
+          const org = 'V-DEF';
 
           // Get the list of team members
           const { data: team } = await github.rest.teams.getByName({
@@ -32,18 +32,25 @@ jobs:
             team_slug: team.slug,
           });
 
+          // Log the team members
+          console.log('Team Members:', teamMembers);
+
           if (teamMembers.length === 0) {
             throw new Error(`No members found in the team ${teamSlug}`);
           }
 
-          // Assign the first member of the team to the issue
-          const assignee = teamMembers[0].login;
+          // Get the logins of all team members
+          const assignees = teamMembers.map(member => member.login);
 
+          // Log assignees
+          console.log('assignees:', assignees);
+
+          // Assign all team members to the issue
           await github.rest.issues.addAssignees({
             owner: context.repo.owner,
             repo: context.repo.repo,
             issue_number: issueNumber,
-            assignees: [assignee],
+            assignees: assignees,
           });
 
-          console.log(`Assigned issue #${issueNumber} to ${assignee}`);
+          console.log(`Assigned issue #${issueNumber} to ${assignees.join(', ')}`);
