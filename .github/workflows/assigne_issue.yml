@@ -21,6 +21,9 @@ jobs:
           const teamSlug = 'v-admins';
           const org = 'V-DEF';
 
+          // Log issueNumber
+          console.log('issueNumber:', issueNumber);
+
           // Get the list of team members
           const { data: team } = await github.rest.teams.getByName({
             org,
@@ -28,7 +31,7 @@ jobs:
           });
 
           // Log List of team members
-          console.log('team:', team);
+          console.log('team infos:', team);
 
           const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
             org,
