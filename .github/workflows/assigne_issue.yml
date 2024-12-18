@@ -3,12 +3,6 @@ name: Assign Issue to Team Member
 on:
   issues:
     types: [opened]
-  workflow_dispatch:
-    inputs:
-      issuenumber:
-        description: 'Temp'
-        required: true
-        type: string
 
 jobs:
   assign-issue:
@@ -23,7 +17,7 @@ jobs:
       with:
         github-token: ${{ secrets.READ_WRITE }}
         script: |
-          const issueNumber = ${{ inputs.issuenumber }};
+          const issueNumber = context.issue.number;
           const teamSlug = 'v-admins';
           const org = context.repo.owner;
 
