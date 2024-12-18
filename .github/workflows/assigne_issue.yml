@@ -27,6 +27,9 @@ jobs:
             team_slug: teamSlug,
           });
 
+          // Log List of team members
+          console.log('team:', team);
+
           const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
             org,
             team_slug: team.slug,
@@ -35,8 +38,8 @@ jobs:
           // Log the team members
           console.log('Team Members:', teamMembers);
 
-          if (teamMembers.length === 0) {
-            throw new Error(`No members found in the team ${teamSlug}`);
+          if (teamMembers.length === 1) {
+            throw new Error(`No members found in the team ${teamSlug }`);
           }
 
           // Get the logins of all team members
