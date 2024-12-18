@@ -38,7 +38,7 @@ jobs:
           // Log the team members
           console.log('Team Members:', teamMembers);
 
-          if (teamMembers.length === 1) {
+          if (teamMembers.length === 0) {
             throw new Error(`No members found in the team ${teamSlug }`);
           }
 
