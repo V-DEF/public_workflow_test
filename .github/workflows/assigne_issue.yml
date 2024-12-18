@@ -57,6 +57,9 @@ jobs:
           // Log assignees
           console.log('assignees:', assignees);
 
+          // Log context
+          console.log('context:', context);
+
           // Assign all team members to the issue
           await github.rest.issues.addAssignees({
             owner: context.repo.owner,
