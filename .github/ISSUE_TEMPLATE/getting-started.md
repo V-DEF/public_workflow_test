@@ -1,9 +1,9 @@
 ---
-name: getting started
-about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
+
+Name: Request access
+About: Request access to ...
+title: 'Request access_'
+labels: 'test_issue'
 
 ---
 
