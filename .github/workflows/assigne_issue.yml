@@ -1,0 +1,40 @@
+name: Assign Issue to v-admin Team Member
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  assign-issue:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Assign issue to v-admin team member
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const issueNumber = context.issue.number;
+          const teamSlug = 'reader';
+          const org = context.repo.owner;
+
+          // Get the list of team members
+          const { data: teamMembers } = await github.rest.teams.listMembersInOrg({
+            org,
+            team_slug: teamSlug,
+          });
+
+          if (teamMembers.length === 0) {
+            throw new Error(`No members found in the team ${teamSlug}`);
+          }
+
+          // Assign the first member of the team to the issue
+          const assignee = teamMembers[0].login;
+
+          await github.rest.issues.addAssignees({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: issueNumber,
+            assignees: [assignee],
+          });
+
+          console.log(`Assigned issue #${issueNumber} to ${assignee}`);
