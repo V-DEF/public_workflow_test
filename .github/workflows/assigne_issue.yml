@@ -4,6 +4,11 @@ on:
   issues:
     types: [opened]
   workflow_dispatch:
+    inputs:
+      issuenumber:
+        description: 'Temp'
+        required: true
+        type: string
 
 jobs:
   assign-issue:
@@ -18,7 +23,7 @@ jobs:
       with:
         github-token: ${{ secrets.READ_WRITE }}
         script: |
-          const issueNumber = '10';
+          const issueNumber = ${{ inputs.issuenumber }};
           const teamSlug = 'v-admins';
           const org = 'V-DEF';
 
