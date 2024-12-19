@@ -6,10 +6,15 @@ on:
 
 jobs:
   assign-issue:
-    if: github.event.issue.title == 'Request access'
+    if: contains(github.event.issue.labels.*.name, 'access')
     runs-on: ubuntu-24.04
 
     steps:
+    - name: Log issue
+      run: |
+       echo "Issue title: ${{ github.event.issue.title }}"
+       echo "Issue label: ${{ github.event.issue.labels }}"
+
     - name: Checkout repository
       uses: actions/checkout@v2
 

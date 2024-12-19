@@ -1,6 +1,7 @@
 name: Access
 description: Access to 
 title: "Access to you"
+labels: ["lab"]
 
 body:
   - type: markdown
