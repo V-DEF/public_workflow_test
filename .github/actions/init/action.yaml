@@ -1,0 +1,8 @@
+name: Initialize
+
+description: Initialize...
+
+inputs:
+  token:
+    description: The token to use for authentication.
+    required: true
