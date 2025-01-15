@@ -4,6 +4,8 @@
 
 All required inputs are shown here, to see the optional inputs, take a look in the [action.yaml](./action.yaml).
 
+Developer 3: Changes after brunch from dev-02
+
 ```
 - name: 'checkout and initialize xyx repository'
   uses: vDEV/checkout-and-initialize-xyx-repository/.github/actions/init@latest
@@ -13,3 +15,4 @@ All required inputs are shown here, to see the optional inputs, take a look in t
 ```
 
 Developer 2: changes after rename folder
+Developer 3: Changes after brunch from dev-02
