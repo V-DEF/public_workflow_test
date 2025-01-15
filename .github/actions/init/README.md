@@ -5,6 +5,7 @@
 All required inputs are shown here, to see the optional inputs, take a look in the [action.yaml](./action.yaml).
 
 Developer 3: Changes after brunch from dev-02
+Developer 1: Changes in action initalisation action.
 
 ```
 - name: 'checkout and initialize xyx repository'
