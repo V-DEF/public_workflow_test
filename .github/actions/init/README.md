@@ -11,4 +11,7 @@ Developer 1: Changes in action initalisation action.
   uses: vDEV/checkout-and-initialize-xyx-repository/.github/actions/init@latest
   with:
     token: ${{ secrets.TOKEN }}
+    path: README-Dev-02.md
 ```
+
+Developer 2: changes after rename folder
